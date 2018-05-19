@@ -1,0 +1,28 @@
+﻿@model KalkulatorMVC.Models.KalkulatorModel
+@using KalkulatorMVC.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Kalkulator", "Kalkulator")) //prvo je ime metode a zatim ime kontrolera
+{
+    //Labels
+    @Html.LabelFor(x => x.PrviOperand) @Html.TextBoxFor(x => x.PrviOperand) <br/>
+    @Html.LabelFor(x => x.DrugiOperand) @Html.TextBoxFor(x => x.DrugiOperand) <br/>
+
+    //Dropdown
+    @Html.DropDownListFor(x => x.Operacija, new SelectList(Enum.GetValues(typeof(Operacija))), "-- Odaberi operaciju")
+
+    //Submit button
+    <input type="submit" value="Izracunaj"/>
+}
+
+    <p>
+        Rezultat: @Html.TextBoxFor(x => x.Rezultat)
+    </p>
+
+
+
