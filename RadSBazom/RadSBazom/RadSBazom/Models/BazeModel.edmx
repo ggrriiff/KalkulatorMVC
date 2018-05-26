@@ -1,0 +1,1478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="shareAndConnectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Experiences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="JobDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupMemberRequests">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupMembers">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdminId" Type="int" Nullable="false" />
+          <Property Name="MaxMembers" Type="int" />
+          <Property Name="InterestId" Type="int" />
+          <Property Name="Image" Type="nvarchar" MaxLength="100" />
+          <Property Name="MembersNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="Interests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MemberRequests">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="MessageBody" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="ParentMessageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectMemberRequests">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectMembers">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdminId" Type="int" Nullable="false" />
+          <Property Name="InterestId" Type="int" />
+          <Property Name="Image" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaxMembers" Type="int" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="MembersNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecipientGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecipientUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="University" Type="nvarchar" MaxLength="50" />
+          <Property Name="Faculty" Type="nvarchar" MaxLength="50" />
+          <Property Name="StudyField" Type="nvarchar" MaxLength="50" />
+          <Property Name="StudyYear" Type="int" />
+          <Property Name="StudyLocation" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StudentsInterests">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="InterestId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="InterestId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentsSkills">
+          <Key>
+            <PropertyRef Name="SkillId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="SkillId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Endorsements" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Mentor" Type="bit" />
+          <Property Name="WorkArea" Type="nvarchar" MaxLength="50" />
+          <Property Name="University" Type="nvarchar" MaxLength="50" />
+          <Property Name="Faculty" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="ResidenceAdress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Password" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Experiences_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Experiences" Type="Self.Experiences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Experiences">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupMemberRequests_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="GroupMemberRequests" Type="Self.GroupMemberRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMemberRequests">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupMemberRequests_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="GroupMemberRequests" Type="Self.GroupMemberRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GroupMemberRequests">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupMembers_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupMembers_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Interests">
+          <End Role="Interests" Type="Self.Interests" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="InterestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberRequests_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="MemberRequests" Type="Self.MemberRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MemberRequests">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberRequests_Students1">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="MemberRequests" Type="Self.MemberRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MemberRequests">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Students1">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Messages">
+          <End Role="Messages" Type="Self.Messages" Multiplicity="1" />
+          <End Role="Messages1" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Messages1">
+              <PropertyRef Name="ParentMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMemberRequests_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectMemberRequests" Type="Self.ProjectMemberRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectMemberRequests">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMemberRequests_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="ProjectMemberRequests" Type="Self.ProjectMemberRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectMemberRequests">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMembers_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectMembers" Type="Self.ProjectMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectMembers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMembers_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="ProjectMembers" Type="Self.ProjectMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectMembers">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Interests">
+          <End Role="Interests" Type="Self.Interests" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="InterestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientGroup_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="RecipientGroup" Type="Self.RecipientGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientGroup_Messages">
+          <End Role="Messages" Type="Self.Messages" Multiplicity="1" />
+          <End Role="RecipientGroup" Type="Self.RecipientGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientGroup">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientUser_Messages">
+          <End Role="Messages" Type="Self.Messages" Multiplicity="1" />
+          <End Role="RecipientUser" Type="Self.RecipientUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientUser">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientUser_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="RecipientUser" Type="Self.RecipientUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentsInterests_Interests">
+          <End Role="Interests" Type="Self.Interests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StudentsInterests" Type="Self.StudentsInterests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentsInterests">
+              <PropertyRef Name="InterestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentsInterests_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StudentsInterests" Type="Self.StudentsInterests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudentsInterests">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentsSkills_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StudentsSkills" Type="Self.StudentsSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentsSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentsSkills_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StudentsSkills" Type="Self.StudentsSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudentsSkills">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="shareAndConnectModelStoreContainer">
+          <EntitySet Name="Experiences" EntityType="Self.Experiences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMemberRequests" EntityType="Self.GroupMemberRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interests" EntityType="Self.Interests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberRequests" EntityType="Self.MemberRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectMemberRequests" EntityType="Self.ProjectMemberRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectMembers" EntityType="Self.ProjectMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecipientGroup" EntityType="Self.RecipientGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecipientUser" EntityType="Self.RecipientUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentsInterests" EntityType="Self.StudentsInterests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentsSkills" EntityType="Self.StudentsSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Experiences_Students" Association="Self.FK_Experiences_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Experiences" EntitySet="Experiences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupMemberRequests_Groups" Association="Self.FK_GroupMemberRequests_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupMemberRequests" EntitySet="GroupMemberRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupMemberRequests_Students" Association="Self.FK_GroupMemberRequests_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupMemberRequests" EntitySet="GroupMemberRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupMembers_Groups" Association="Self.FK_GroupMembers_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupMembers_Students" Association="Self.FK_GroupMembers_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Interests" Association="Self.FK_Groups_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Students" Association="Self.FK_Groups_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberRequests_Students" Association="Self.FK_MemberRequests_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="MemberRequests" EntitySet="MemberRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberRequests_Students1" Association="Self.FK_MemberRequests_Students1">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="MemberRequests" EntitySet="MemberRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Students" Association="Self.FK_Members_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Students1" Association="Self.FK_Members_Students1">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Messages" Association="Self.FK_Messages_Messages">
+            <End Role="Messages" EntitySet="Messages" />
+            <End Role="Messages1" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Users" Association="Self.FK_Messages_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMemberRequests_Projects" Association="Self.FK_ProjectMemberRequests_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectMemberRequests" EntitySet="ProjectMemberRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMemberRequests_Students" Association="Self.FK_ProjectMemberRequests_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="ProjectMemberRequests" EntitySet="ProjectMemberRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMembers_Projects" Association="Self.FK_ProjectMembers_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectMembers" EntitySet="ProjectMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMembers_Students" Association="Self.FK_ProjectMembers_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="ProjectMembers" EntitySet="ProjectMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Groups" Association="Self.FK_Projects_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Interests" Association="Self.FK_Projects_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Students" Association="Self.FK_Projects_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientGroup_Groups" Association="Self.FK_RecipientGroup_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="RecipientGroup" EntitySet="RecipientGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientGroup_Messages" Association="Self.FK_RecipientGroup_Messages">
+            <End Role="Messages" EntitySet="Messages" />
+            <End Role="RecipientGroup" EntitySet="RecipientGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientUser_Messages" Association="Self.FK_RecipientUser_Messages">
+            <End Role="Messages" EntitySet="Messages" />
+            <End Role="RecipientUser" EntitySet="RecipientUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientUser_Users" Association="Self.FK_RecipientUser_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RecipientUser" EntitySet="RecipientUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Users" Association="Self.FK_Students_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentsInterests_Interests" Association="Self.FK_StudentsInterests_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="StudentsInterests" EntitySet="StudentsInterests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentsInterests_Students" Association="Self.FK_StudentsInterests_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentsInterests" EntitySet="StudentsInterests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentsSkills_Skills" Association="Self.FK_StudentsSkills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="StudentsSkills" EntitySet="StudentsSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentsSkills_Students" Association="Self.FK_StudentsSkills_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentsSkills" EntitySet="StudentsSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Users" Association="Self.FK_Teachers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Teachers" EntitySet="Teachers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shareAndConnectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Experience">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Experiences_Students" FromRole="Experiences" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
+          <Property Name="MaxMembers" Type="Int32" />
+          <Property Name="InterestId" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MembersNumber" Type="Int32" />
+          <NavigationProperty Name="Interest" Relationship="Self.FK_Groups_Interests" FromRole="Groups" ToRole="Interests" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Groups_Students" FromRole="Groups" ToRole="Students" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Groups" FromRole="Groups" ToRole="Projects" />
+          <NavigationProperty Name="RecipientGroups" Relationship="Self.FK_RecipientGroup_Groups" FromRole="Groups" ToRole="RecipientGroup" />
+          <NavigationProperty Name="Students" Relationship="Self.GroupMemberRequests" FromRole="Groups" ToRole="Students" />
+          <NavigationProperty Name="Students1" Relationship="Self.GroupMembers" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Interest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_Interests" FromRole="Interests" ToRole="Groups" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Interests" FromRole="Interests" ToRole="Projects" />
+          <NavigationProperty Name="Students" Relationship="Self.StudentsInterests" FromRole="Interests" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="MessageBody" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ParentMessageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Messages1" Relationship="Self.FK_Messages_Messages" FromRole="Messages" ToRole="Messages1" />
+          <NavigationProperty Name="Message1" Relationship="Self.FK_Messages_Messages" FromRole="Messages1" ToRole="Messages" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
+          <NavigationProperty Name="RecipientGroups" Relationship="Self.FK_RecipientGroup_Messages" FromRole="Messages" ToRole="RecipientGroup" />
+          <NavigationProperty Name="RecipientUsers" Relationship="Self.FK_RecipientUser_Messages" FromRole="Messages" ToRole="RecipientUser" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
+          <Property Name="InterestId" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaxMembers" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="MembersNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Projects_Groups" FromRole="Projects" ToRole="Groups" />
+          <NavigationProperty Name="Interest" Relationship="Self.FK_Projects_Interests" FromRole="Projects" ToRole="Interests" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Projects_Students" FromRole="Projects" ToRole="Students" />
+          <NavigationProperty Name="Students" Relationship="Self.ProjectMemberRequests" FromRole="Projects" ToRole="Students" />
+          <NavigationProperty Name="Students1" Relationship="Self.ProjectMembers" FromRole="Projects" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="RecipientGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_RecipientGroup_Groups" FromRole="RecipientGroup" ToRole="Groups" />
+          <NavigationProperty Name="Message" Relationship="Self.FK_RecipientGroup_Messages" FromRole="RecipientGroup" ToRole="Messages" />
+        </EntityType>
+        <EntityType Name="RecipientUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Message" Relationship="Self.FK_RecipientUser_Messages" FromRole="RecipientUser" ToRole="Messages" />
+          <NavigationProperty Name="User" Relationship="Self.FK_RecipientUser_Users" FromRole="RecipientUser" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="StudentsSkills" Relationship="Self.FK_StudentsSkills_Skills" FromRole="Skills" ToRole="StudentsSkills" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="University" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Faculty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudyField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudyYear" Type="Int32" />
+          <Property Name="StudyLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Experiences" Relationship="Self.FK_Experiences_Students" FromRole="Students" ToRole="Experiences" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_Students" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Students" FromRole="Students" ToRole="Projects" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Students_Users" FromRole="Students" ToRole="Users" />
+          <NavigationProperty Name="StudentsSkills" Relationship="Self.FK_StudentsSkills_Students" FromRole="Students" ToRole="StudentsSkills" />
+          <NavigationProperty Name="Groups1" Relationship="Self.GroupMemberRequests" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="Groups2" Relationship="Self.GroupMembers" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="Students1" Relationship="Self.MemberRequests" FromRole="Students" ToRole="Students1" />
+          <NavigationProperty Name="Students" Relationship="Self.MemberRequests" FromRole="Students1" ToRole="Students" />
+          <NavigationProperty Name="Students11" Relationship="Self.Members" FromRole="Students" ToRole="Students1" />
+          <NavigationProperty Name="Students2" Relationship="Self.Members" FromRole="Students1" ToRole="Students" />
+          <NavigationProperty Name="Projects1" Relationship="Self.ProjectMemberRequests" FromRole="Students" ToRole="Projects" />
+          <NavigationProperty Name="Projects2" Relationship="Self.ProjectMembers" FromRole="Students" ToRole="Projects" />
+          <NavigationProperty Name="Interests" Relationship="Self.StudentsInterests" FromRole="Students" ToRole="Interests" />
+        </EntityType>
+        <EntityType Name="StudentsSkill">
+          <Key>
+            <PropertyRef Name="SkillId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="SkillId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Endorsements" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_StudentsSkills_Skills" FromRole="StudentsSkills" ToRole="Skills" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentsSkills_Students" FromRole="StudentsSkills" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Mentor" Type="Boolean" />
+          <Property Name="WorkArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="University" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Faculty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Teachers_Users" FromRole="Teachers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Name="ResidenceAdress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
+          <NavigationProperty Name="RecipientUsers" Relationship="Self.FK_RecipientUser_Users" FromRole="Users" ToRole="RecipientUser" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Students_Users" FromRole="Users" ToRole="Students" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Teachers_Users" FromRole="Users" ToRole="Teachers" />
+        </EntityType>
+        <Association Name="FK_Experiences_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Experiences" Type="Self.Experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Experiences">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Interests">
+          <End Role="Interests" Type="Self.Interest" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="InterestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Groups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientGroup_Groups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="RecipientGroup" Type="Self.RecipientGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Interests">
+          <End Role="Interests" Type="Self.Interest" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="InterestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Messages">
+          <End Role="Messages" Type="Self.Message" Multiplicity="1" />
+          <End Role="Messages1" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Messages1">
+              <PropertyRef Name="ParentMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientGroup_Messages">
+          <End Role="Messages" Type="Self.Message" Multiplicity="1" />
+          <End Role="RecipientGroup" Type="Self.RecipientGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientGroup">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientUser_Messages">
+          <End Role="Messages" Type="Self.Message" Multiplicity="1" />
+          <End Role="RecipientUser" Type="Self.RecipientUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientUser">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipientUser_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="RecipientUser" Type="Self.RecipientUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipientUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentsSkills_Skills">
+          <End Role="Skills" Type="Self.Skill" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StudentsSkills" Type="Self.StudentsSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentsSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentsSkills_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StudentsSkills" Type="Self.StudentsSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudentsSkills">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teachers" Type="Self.Teacher" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupMemberRequests">
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="GroupMembers">
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="MemberRequests">
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <End Role="Students1" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="Members">
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <End Role="Students1" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectMemberRequests">
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectMembers">
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="StudentsInterests">
+          <End Role="Interests" Type="Self.Interest" Multiplicity="*" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="shareAndConnectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Experiences" EntityType="Self.Experience" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Interests" EntityType="Self.Interest" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="RecipientGroups" EntityType="Self.RecipientGroup" />
+          <EntitySet Name="RecipientUsers" EntityType="Self.RecipientUser" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="StudentsSkills" EntityType="Self.StudentsSkill" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Experiences_Students" Association="Self.FK_Experiences_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Experiences" EntitySet="Experiences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Interests" Association="Self.FK_Groups_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Students" Association="Self.FK_Groups_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Groups" Association="Self.FK_Projects_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientGroup_Groups" Association="Self.FK_RecipientGroup_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="RecipientGroup" EntitySet="RecipientGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Interests" Association="Self.FK_Projects_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Messages" Association="Self.FK_Messages_Messages">
+            <End Role="Messages" EntitySet="Messages" />
+            <End Role="Messages1" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Users" Association="Self.FK_Messages_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientGroup_Messages" Association="Self.FK_RecipientGroup_Messages">
+            <End Role="Messages" EntitySet="Messages" />
+            <End Role="RecipientGroup" EntitySet="RecipientGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientUser_Messages" Association="Self.FK_RecipientUser_Messages">
+            <End Role="Messages" EntitySet="Messages" />
+            <End Role="RecipientUser" EntitySet="RecipientUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Students" Association="Self.FK_Projects_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipientUser_Users" Association="Self.FK_RecipientUser_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RecipientUser" EntitySet="RecipientUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentsSkills_Skills" Association="Self.FK_StudentsSkills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="StudentsSkills" EntitySet="StudentsSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Users" Association="Self.FK_Students_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentsSkills_Students" Association="Self.FK_StudentsSkills_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentsSkills" EntitySet="StudentsSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Users" Association="Self.FK_Teachers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Teachers" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="GroupMemberRequests" Association="Self.GroupMemberRequests">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="GroupMembers" Association="Self.GroupMembers">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="MemberRequests" Association="Self.MemberRequests">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Students1" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="Members" Association="Self.Members">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Students1" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectMemberRequests" Association="Self.ProjectMemberRequests">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectMembers" Association="Self.ProjectMembers">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="StudentsInterests" Association="Self.StudentsInterests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shareAndConnectModelStoreContainer" CdmEntityContainer="shareAndConnectEntities">
+          <EntitySetMapping Name="Experiences">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Experience">
+              <MappingFragment StoreEntitySet="Experiences">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Employer" ColumnName="Employer" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="MaxMembers" ColumnName="MaxMembers" />
+                <ScalarProperty Name="InterestId" ColumnName="InterestId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="MembersNumber" ColumnName="MembersNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interests">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Interest">
+              <MappingFragment StoreEntitySet="Interests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ParentMessageId" ColumnName="ParentMessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="InterestId" ColumnName="InterestId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="MaxMembers" ColumnName="MaxMembers" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="MembersNumber" ColumnName="MembersNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecipientGroups">
+            <EntityTypeMapping TypeName="shareAndConnectModel.RecipientGroup">
+              <MappingFragment StoreEntitySet="RecipientGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecipientUsers">
+            <EntityTypeMapping TypeName="shareAndConnectModel.RecipientUser">
+              <MappingFragment StoreEntitySet="RecipientUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Skill">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="University" ColumnName="University" />
+                <ScalarProperty Name="Faculty" ColumnName="Faculty" />
+                <ScalarProperty Name="StudyField" ColumnName="StudyField" />
+                <ScalarProperty Name="StudyYear" ColumnName="StudyYear" />
+                <ScalarProperty Name="StudyLocation" ColumnName="StudyLocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsSkills">
+            <EntityTypeMapping TypeName="shareAndConnectModel.StudentsSkill">
+              <MappingFragment StoreEntitySet="StudentsSkills">
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Endorsements" ColumnName="Endorsements" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="shareAndConnectModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="shareAndConnectModel.Teacher">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Mentor" ColumnName="Mentor" />
+                <ScalarProperty Name="WorkArea" ColumnName="WorkArea" />
+                <ScalarProperty Name="University" ColumnName="University" />
+                <ScalarProperty Name="Faculty" ColumnName="Faculty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="shareAndConnectModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="ResidenceAdress" ColumnName="ResidenceAdress" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="GroupMemberRequests" TypeName="shareAndConnectModel.GroupMemberRequests" StoreEntitySet="GroupMemberRequests">
+            <EndProperty Name="Groups">
+              <ScalarProperty Name="Id" ColumnName="GroupId" />
+            </EndProperty>
+            <EndProperty Name="Students">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="GroupMembers" TypeName="shareAndConnectModel.GroupMembers" StoreEntitySet="GroupMembers">
+            <EndProperty Name="Groups">
+              <ScalarProperty Name="Id" ColumnName="GroupId" />
+            </EndProperty>
+            <EndProperty Name="Students">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MemberRequests" TypeName="shareAndConnectModel.MemberRequests" StoreEntitySet="MemberRequests">
+            <EndProperty Name="Students">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+            <EndProperty Name="Students1">
+              <ScalarProperty Name="UserId" ColumnName="MemberId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Members" TypeName="shareAndConnectModel.Members" StoreEntitySet="Members">
+            <EndProperty Name="Students">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+            <EndProperty Name="Students1">
+              <ScalarProperty Name="UserId" ColumnName="MemberId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectMemberRequests" TypeName="shareAndConnectModel.ProjectMemberRequests" StoreEntitySet="ProjectMemberRequests">
+            <EndProperty Name="Projects">
+              <ScalarProperty Name="Id" ColumnName="ProjectId" />
+            </EndProperty>
+            <EndProperty Name="Students">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectMembers" TypeName="shareAndConnectModel.ProjectMembers" StoreEntitySet="ProjectMembers">
+            <EndProperty Name="Projects">
+              <ScalarProperty Name="Id" ColumnName="ProjectId" />
+            </EndProperty>
+            <EndProperty Name="Students">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="StudentsInterests" TypeName="shareAndConnectModel.StudentsInterests" StoreEntitySet="StudentsInterests">
+            <EndProperty Name="Interests">
+              <ScalarProperty Name="Id" ColumnName="InterestId" />
+            </EndProperty>
+            <EndProperty Name="Students">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
